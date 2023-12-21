@@ -250,13 +250,18 @@ class HFBertEncoder(LongformerModel):
             2. 你可以打印tensor.shape (如input_ids.shape)来观察向量形状
             3. 理解输入输出向量各个维度的意义, 从sequence_output取出representation_token_pos位置的向量时, 你需要确保在正确维度上取值
         """
-        sequence_output = None
-        pooled_output = None
-        hidden_states = None
         
-
-        # TODO for class
-        return sequence_output, pooled_output, hidden_states
+        #可参考：https://huggingface.co/transformers/v3.1.0/_modules/transformers/modeling_longformer.html
+        t_ = super().forward(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
+        sequence_output = t_.last_hidden_state
+        if self.encode_proj:
+            pooled_output = self.encode_proj(sequence_output[:, representation_token_pos, :])
+        else:
+            pooled_output = t_.pooler_output
+        # print(sequence_output.shape, pooled_output.shape)
+        # exit(0)
+        return sequence_output, pooled_output, None
+        # DONE for class
 
     def get_out_size(self):
         if self.encode_proj:

@@ -14,7 +14,7 @@ torchrun --nproc_per_node 1 \
     train_dense_encoder.py \
     fp16=True \
     encoder.pretrained_model_cfg=${model_file_path} \
-    encoder.sequence_length=2048 \
+    encoder.sequence_length=512 \
     train=biencoder_Law \
     train.num_train_epochs=40 \
     val_av_rank_start_epoch=40 \

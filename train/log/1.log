@@ -1,11 +1,11 @@
-[2023-12-21 13:15:14,854][root][INFO] - CFG's local_rank=0
-[2023-12-21 13:15:14,855][root][INFO] - Env WORLD_SIZE=1
-[2023-12-21 13:15:14,875][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
-[2023-12-21 13:15:14,875][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 1 nodes.
-[2023-12-21 13:15:14,875][root][INFO] - Initialized host 100server as d.rank 0 on device=cuda:0, n_gpu=1, world size=1
-[2023-12-21 13:15:14,875][root][INFO] - 16-bits training: True 
-[2023-12-21 13:15:14,876][root][INFO] - CFG (after gpu  configuration):
-[2023-12-21 13:15:14,883][root][INFO] - train_datasets:
+[2023-12-21 13:47:33,485][root][INFO] - CFG's local_rank=0
+[2023-12-21 13:47:33,485][root][INFO] - Env WORLD_SIZE=1
+[2023-12-21 13:47:33,506][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
+[2023-12-21 13:47:33,506][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 1 nodes.
+[2023-12-21 13:47:33,506][root][INFO] - Initialized host 100server as d.rank 0 on device=cuda:0, n_gpu=1, world size=1
+[2023-12-21 13:47:33,506][root][INFO] - 16-bits training: True 
+[2023-12-21 13:47:33,506][root][INFO] - CFG (after gpu  configuration):
+[2023-12-21 13:47:33,513][root][INFO] - train_datasets:
 - Law_data_train
 dev_datasets:
 - Law_data_dev
@@ -38,7 +38,7 @@ encoder:
   pretrained_model_cfg: /home/hanpeixuan/DPR/downloads/model/Lawformer_model
   pretrained_file: null
   projection_dim: 0
-  sequence_length: 2048
+  sequence_length: 512
   dropout: 0.1
   fix_ctx_encoder: false
   pretrained: true
@@ -118,10 +118,10 @@ datasets:
     _target_: dpr.data.biencoder_data.JsonlistQADataset
     file: ''
 
-[2023-12-21 13:15:14,883][root][INFO] - ***** Initializing components for training *****
-[2023-12-21 13:15:14,883][root][INFO] - Checkpoint files []
-[2023-12-21 13:15:15,109][dpr.models.hf_models][INFO] - Initializing HF BERT Encoder. cfg_name=/home/hanpeixuan/DPR/downloads/model/Lawformer_model
-[2023-12-21 13:15:16,442][dpr.models.hf_models][INFO] - Initializing HF BERT Encoder. cfg_name=/home/hanpeixuan/DPR/downloads/model/Lawformer_model
+[2023-12-21 13:47:33,513][root][INFO] - ***** Initializing components for training *****
+[2023-12-21 13:47:33,513][root][INFO] - Checkpoint files []
+[2023-12-21 13:47:33,735][dpr.models.hf_models][INFO] - Initializing HF BERT Encoder. cfg_name=/home/hanpeixuan/DPR/downloads/model/Lawformer_model
+[2023-12-21 13:47:35,036][dpr.models.hf_models][INFO] - Initializing HF BERT Encoder. cfg_name=/home/hanpeixuan/DPR/downloads/model/Lawformer_model
 Selected optimization level O1:  Insert automatic casts around Pytorch functions and Tensor methods.
 
 Defaults for this optimization level are:
@@ -141,29 +141,38 @@ patch_torch_functions  : True
 keep_batchnorm_fp32    : None
 master_weights         : None
 loss_scale             : dynamic
-[2023-12-21 13:15:20,633][dpr.utils.conf_utils][INFO] - train_datasets: ['Law_data_train']
-[2023-12-21 13:15:20,651][dpr.utils.conf_utils][INFO] - dev_datasets: ['Law_data_dev']
-[2023-12-21 13:15:20,667][root][INFO] - Initializing task/set data ['Law_data_train']
-[2023-12-21 13:15:20,668][root][INFO] - Calculating shard positions
-[2023-12-21 13:15:20,668][dpr.data.biencoder_data][INFO] - Loading all data
-[2023-12-21 13:15:20,668][dpr.data.biencoder_data][INFO] - Data files: ['/home/hanpeixuan/DPR/data/data.jsonl']
-[2023-12-21 13:15:20,668][root][INFO] - Reading file /home/hanpeixuan/DPR/data/data.jsonl
-[2023-12-21 13:15:22,823][root][INFO] - Aggregated data size: 205619
-[2023-12-21 13:15:22,871][dpr.data.biencoder_data][INFO] - Total cleaned data size: 205619
-[2023-12-21 13:15:22,874][root][INFO] - samples_per_shard=205619, shard_start_idx=0, shard_end_idx=205619, max_iterations=12851
-[2023-12-21 13:15:22,874][root][INFO] - Sharded dataset data 205619
-[2023-12-21 13:15:22,874][root][INFO] - rank=0; Multi set data sizes [205619]
-[2023-12-21 13:15:22,874][root][INFO] - rank=0; Multi set total data 205619
-[2023-12-21 13:15:22,874][root][INFO] - rank=0; Multi set sampling_rates None
-[2023-12-21 13:15:22,874][root][INFO] - rank=0; Multi set max_iterations per dataset [12851]
-[2023-12-21 13:15:22,874][root][INFO] - rank=0; Multi set max_iterations 12851
-[2023-12-21 13:15:22,874][root][INFO] -   Total iterations per epoch=12851
-[2023-12-21 13:15:22,874][root][INFO] -  Total updates=514040
-[2023-12-21 13:15:22,874][root][INFO] -   Eval step = 12851
-[2023-12-21 13:15:22,875][root][INFO] - ***** Training *****
-[2023-12-21 13:15:22,875][root][INFO] - ***** Epoch 0 *****
-[2023-12-21 13:15:22,876][root][INFO] - rank=0; Iteration start
-[2023-12-21 13:15:22,877][root][INFO] - rank=0; Multi set iteration: iteration ptr per set: [0]
-[2023-12-21 13:15:22,877][root][INFO] - rank=0; Multi set iteration: source 0, batches to be taken: 12851
-[2023-12-21 13:15:22,880][root][INFO] - rank=0; data_src_indices len=12851
-VISITING forward
+[2023-12-21 13:47:39,329][dpr.utils.conf_utils][INFO] - train_datasets: ['Law_data_train']
+[2023-12-21 13:47:39,347][dpr.utils.conf_utils][INFO] - dev_datasets: ['Law_data_dev']
+[2023-12-21 13:47:39,364][root][INFO] - Initializing task/set data ['Law_data_train']
+[2023-12-21 13:47:39,364][root][INFO] - Calculating shard positions
+[2023-12-21 13:47:39,364][dpr.data.biencoder_data][INFO] - Loading all data
+[2023-12-21 13:47:39,365][dpr.data.biencoder_data][INFO] - Data files: ['/home/hanpeixuan/DPR/data/data.jsonl']
+[2023-12-21 13:47:39,365][root][INFO] - Reading file /home/hanpeixuan/DPR/data/data.jsonl
+[2023-12-21 13:47:41,519][root][INFO] - Aggregated data size: 205619
+[2023-12-21 13:47:41,566][dpr.data.biencoder_data][INFO] - Total cleaned data size: 205619
+[2023-12-21 13:47:41,569][root][INFO] - samples_per_shard=205619, shard_start_idx=0, shard_end_idx=205619, max_iterations=12851
+[2023-12-21 13:47:41,569][root][INFO] - Sharded dataset data 205619
+[2023-12-21 13:47:41,569][root][INFO] - rank=0; Multi set data sizes [205619]
+[2023-12-21 13:47:41,569][root][INFO] - rank=0; Multi set total data 205619
+[2023-12-21 13:47:41,569][root][INFO] - rank=0; Multi set sampling_rates None
+[2023-12-21 13:47:41,569][root][INFO] - rank=0; Multi set max_iterations per dataset [12851]
+[2023-12-21 13:47:41,569][root][INFO] - rank=0; Multi set max_iterations 12851
+[2023-12-21 13:47:41,569][root][INFO] -   Total iterations per epoch=12851
+[2023-12-21 13:47:41,569][root][INFO] -  Total updates=514040
+[2023-12-21 13:47:41,570][root][INFO] -   Eval step = 12851
+[2023-12-21 13:47:41,570][root][INFO] - ***** Training *****
+[2023-12-21 13:47:41,570][root][INFO] - ***** Epoch 0 *****
+[2023-12-21 13:47:41,572][root][INFO] - rank=0; Iteration start
+[2023-12-21 13:47:41,572][root][INFO] - rank=0; Multi set iteration: iteration ptr per set: [0]
+[2023-12-21 13:47:41,572][root][INFO] - rank=0; Multi set iteration: source 0, batches to be taken: 12851
+[2023-12-21 13:47:41,576][root][INFO] - rank=0; data_src_indices len=12851
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 32768.0
+[2023-12-21 13:47:43,150][root][INFO] - Epoch: 0: Step: 1/12851, loss=4.520099, lr=0.000000
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 16384.0
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 8192.0
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 4096.0
+[2023-12-21 13:47:55,436][root][INFO] - Epoch: 0: Step: 11/12851, loss=4.111502, lr=0.000000
+[2023-12-21 13:48:07,818][root][INFO] - Epoch: 0: Step: 21/12851, loss=3.837312, lr=0.000001
+[2023-12-21 13:48:20,241][root][INFO] - Epoch: 0: Step: 31/12851, loss=3.641040, lr=0.000001
+[2023-12-21 13:48:32,641][root][INFO] - Epoch: 0: Step: 41/12851, loss=3.279587, lr=0.000001
+[2023-12-21 13:48:45,040][root][INFO] - Epoch: 0: Step: 51/12851, loss=3.175223, lr=0.000001

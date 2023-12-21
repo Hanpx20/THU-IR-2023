@@ -1,0 +1,15 @@
+**[2023-12-21 13:47:41,570][root][INFO] - ***** Epoch 0 *****
+[2023-12-21 13:47:41,572][root][INFO] - rank=0; Iteration start
+[2023-12-21 13:47:41,572][root][INFO] - rank=0; Multi set iteration: iteration ptr per set: [0]
+[2023-12-21 13:47:41,572][root][INFO] - rank=0; Multi set iteration: source 0, batches to be taken: 12851
+[2023-12-21 13:47:41,576][root][INFO] - rank=0; data_src_indices len=12851
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 32768.0
+[2023-12-21 13:47:43,150][root][INFO] - Epoch: 0: Step: 1/12851, loss=4.520099, lr=0.000000
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 16384.0
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 8192.0
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 4096.0
+[2023-12-21 13:47:55,436][root][INFO] - Epoch: 0: Step: 11/12851, loss=4.111502, lr=0.000000
+[2023-12-21 13:48:07,818][root][INFO] - Epoch: 0: Step: 21/12851, loss=3.837312, lr=0.000001
+[2023-12-21 13:48:20,241][root][INFO] - Epoch: 0: Step: 31/12851, loss=3.641040, lr=0.000001
+[2023-12-21 13:48:32,641][root][INFO] - Epoch: 0: Step: 41/12851, loss=3.279587, lr=0.000001
+[2023-12-21 13:48:45,040][root][INFO] - Epoch: 0: Step: 51/12851, loss=3.175223, lr=0.000001
