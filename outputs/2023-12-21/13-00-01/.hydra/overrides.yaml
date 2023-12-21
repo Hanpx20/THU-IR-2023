@@ -1,0 +1,12 @@
+- fp16=True
+- encoder.pretrained_model_cfg=/home/hanpeixuan/DPR/downloads/model/Lawformer_model
+- encoder.sequence_length=2048
+- train=biencoder_Law
+- train.num_train_epochs=40
+- val_av_rank_start_epoch=40
+- checkpoint_file_name=dpr_biencoder
+- train_datasets=[Law_data_train]
+- datasets.Law_data_train.file=/home/hanpeixuan/DPR/data/data.jsonl
+- dev_datasets=[Law_data_dev]
+- datasets.Law_data_dev.file=
+- output_dir=/home/hanpeixuan/DPR/train/checkpoint

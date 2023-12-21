@@ -1,0 +1,137 @@
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}
+  hydra_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][HYDRA] %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+    root:
+      level: INFO
+      handlers:
+      - console
+    loggers:
+      logging_example:
+        level: DEBUG
+    disable_existing_loggers: false
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+      file:
+        class: logging.FileHandler
+        formatter: simple
+        filename: ${hydra.job.name}.log
+    root:
+      level: INFO
+      handlers:
+      - console
+      - file
+    disable_existing_loggers: false
+  sweeper:
+    _target_: hydra._internal.core_plugins.basic_sweeper.BasicSweeper
+    max_batch_size: null
+  launcher:
+    _target_: hydra._internal.core_plugins.basic_launcher.BasicLauncher
+  help:
+    app_name: ${hydra.job.name}
+    header: '${hydra.help.app_name} is powered by Hydra.
+
+      '
+    footer: 'Powered by Hydra (https://hydra.cc)
+
+      Use --hydra-help to view Hydra specific help
+
+      '
+    template: '${hydra.help.header}
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (group=option)
+
+
+      $APP_CONFIG_GROUPS
+
+
+      == Config ==
+
+      Override anything in the config (foo.bar=value)
+
+
+      $CONFIG
+
+
+      ${hydra.help.footer}
+
+      '
+  hydra_help:
+    hydra_help: ???
+    template: 'Hydra (${hydra.runtime.version})
+
+      See https://hydra.cc for more info.
+
+
+      == Flags ==
+
+      $FLAGS_HELP
+
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (For example, append hydra/job_logging=disabled
+      to command line)
+
+
+      $HYDRA_CONFIG_GROUPS
+
+
+      Use ''--cfg hydra'' to Show the Hydra config.
+
+      '
+  output_subdir: .hydra
+  overrides:
+    hydra: []
+    task:
+    - fp16=True
+    - encoder.pretrained_model_cfg=/home/hanpeixuan/DPR/downloads/model/Lawformer_model
+    - encoder.sequence_length=2048
+    - train=biencoder_Law
+    - train.num_train_epochs=40
+    - val_av_rank_start_epoch=40
+    - checkpoint_file_name=dpr_biencoder
+    - train_datasets=[Law_data_train]
+    - datasets.Law_data_train.file=/home/hanpeixuan/DPR/data/data.jsonl
+    - dev_datasets=[Law_data_dev]
+    - datasets.Law_data_dev.file=
+    - output_dir=/home/hanpeixuan/DPR/train/checkpoint
+  job:
+    name: train_dense_encoder
+    override_dirname: checkpoint_file_name=dpr_biencoder,datasets.Law_data_dev.file=,datasets.Law_data_train.file=/home/hanpeixuan/DPR/data/data.jsonl,dev_datasets=[Law_data_dev],encoder.pretrained_model_cfg=/home/hanpeixuan/DPR/downloads/model/Lawformer_model,encoder.sequence_length=2048,fp16=True,output_dir=/home/hanpeixuan/DPR/train/checkpoint,train.num_train_epochs=40,train=biencoder_Law,train_datasets=[Law_data_train],val_av_rank_start_epoch=40
+    id: ???
+    num: ???
+    config_name: biencoder_train_cfg
+    env_set: {}
+    env_copy: []
+    config:
+      override_dirname:
+        kv_sep: '='
+        item_sep: ','
+        exclude_keys: []
+  runtime:
+    version: 1.0.7
+    cwd: /home/hanpeixuan/DPR
+  verbose: false
